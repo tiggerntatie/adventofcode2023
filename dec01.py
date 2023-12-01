@@ -1,8 +1,9 @@
 import string
 
 def part1(data):
-    d = [filter(lambda c: c in string.digits, l) for l in data]
-    return list(d)
+    d = [list(filter(lambda c: c in string.digits, l)) for l in data]
+    s = sum(int(l[0]+l[-1]) for l in d)
+    return s
     
 print (__name__)
 if __name__ == 'exec':
