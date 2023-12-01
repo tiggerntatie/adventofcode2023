@@ -10,26 +10,31 @@ def part1(data):
 def part2(data):
     def startswithdigit(s):
         if s[0] in string.digits:
-            return s[0]
+            return int(s[0])
         return False
     
     def startswithtextdigit(s):
         for t in ['one','two','three','four','five','six','seven','eight','nine']:
             if s.find(t) == 0:
-                return t
+                return int(t)
         return False
     
-    d1 = ''
-    d2 = ''
+    def startswithnumbah(s):
+        if n := startswithdigit(s):
+            return n
+        if n := startswithtextdigits(s):
+            return n
+        return False
+    
+    d1 = 0
+    d2 = 0
     for l in data:
         for n in range(len(l)):
-            if d := startswithdigit(l[n:]):
+            if d1 := startswithnumbah(l[n:]):
                 break
-            if d := startswithtextdigits(l[n:]):
-                break
-        d1 = d
-        for n in range(len(l))
-        
+        for n in range(len(l),0,-1):
+            if d2 := startswithnumbah(l[n:])
+    return d1*10 + d2
     
     
 if __name__ in ['exec','__main__']:
