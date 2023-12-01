@@ -1,3 +1,9 @@
+# Part 1:
+# 142
+# 55447
+# Part 2:
+# 
+
 import string
 
 # Return sum of calibration values for given list of input strings
@@ -9,6 +15,7 @@ def part1(data):
 # Return sum of calibration values according to part 2 rules
 def part2(data):
     def startswithdigit(s):
+        print(s, s[0])
         if s[0] in string.digits:
             return int(s[0])
         return False
@@ -29,7 +36,9 @@ def part2(data):
     d1 = 0
     d2 = 0
     for l in data:
+        print(l)
         for n in range(len(l)):
+            print(n, l[n:])
             if d1 := startswithnumbah(l[n:]):
                 break
         for n in range(len(l),0,-1):
