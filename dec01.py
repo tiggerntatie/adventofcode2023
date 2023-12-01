@@ -2,7 +2,10 @@
 # 142
 # 55447
 # Part 2:
-# 
+# 142
+# 281
+# 54706
+
 
 import string
 
@@ -15,36 +18,36 @@ def part1(data):
 # Return sum of calibration values according to part 2 rules
 def part2(data):
     def startswithdigit(s):
-        print(s, s[0])
         if s[0] in string.digits:
             return int(s[0])
         return False
     
     def startswithtextdigit(s):
-        for t in ['one','two','three','four','five','six','seven','eight','nine']:
+        numnames = ['one','two','three','four','five','six','seven','eight','nine']
+        for x, t in enumerate(numnames):
             if s.find(t) == 0:
-                return int(t)
+                return x+1
         return False
     
     def startswithnumbah(s):
         if n := startswithdigit(s):
             return n
-        if n := startswithtextdigits(s):
+        if n := startswithtextdigit(s):
             return n
         return False
     
     d1 = 0
     d2 = 0
+    r = 0
     for l in data:
-        print(l)
         for n in range(len(l)):
-            print(n, l[n:])
             if d1 := startswithnumbah(l[n:]):
                 break
-        for n in range(len(l),0,-1):
+        for n in range(len(l)-1,-1,-1):
             if d2 := startswithnumbah(l[n:]):
                 break
-    return d1*10 + d2
+        r += d1*10 + d2
+    return r
     
     
 if __name__ in ['exec','__main__']:
