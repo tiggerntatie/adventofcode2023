@@ -33,7 +33,7 @@ def part2(data):
             if d1 := startswithnumbah(l[n:]):
                 break
         for n in range(len(l),0,-1):
-            if d2 := startswithnumbah(l[n:])
+            if d2 := startswithnumbah(l[n:]):
                 break
     return d1*10 + d2
     
