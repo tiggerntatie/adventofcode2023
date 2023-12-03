@@ -8,6 +8,7 @@
 # 
 
 import string
+from re import finditer
 
 def part1and2(data):
     nums = {}
@@ -15,30 +16,11 @@ def part1and2(data):
     gears = {}
 
     def parsenums(lindex, line):
-        searching = True
-        num = 0
-        cindex = 0
-        for n, c in enumerate(line):
-            if searching: # searching for a number
-                if c in string.digits: # found a first digit
-                    searching = False
-                    cindex = n
-                    num = int(c)
-                elif c != '.':
-                    syms[(n, lindex)] = c # found a symbol                
-            else: # not searching (inside number)
-                if c not in string.digits: # end of a number
-                    searching = True
-                    nums[(cindex, lindex)] = (num, len(str(num))) # found a number
-                    num = 0
-                    if c != '.':
-                        syms[(n, lindex)] = c # symbol at the end
-                else:
-                    num = num*10 + int(c)
-        # clean up end of line search
-        if not searching:
-            nums[(cindex, lindex)] = (num, len(str(num))) # found a number
-                
+        for match in finditer("([0-9]+)",line):
+            nums[(match.span()[0], lindex)] = (int(match.group()), match.span()[1]-match.span()[0])
+        for match in finditer("([^0-9.])",line):
+            syms[(match.span()[0], lindex)] = match.group()
+                        
     for lindex, line in enumerate(data):
         parsenums(lindex, line.strip())
     totes = 0
