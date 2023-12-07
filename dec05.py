@@ -15,15 +15,10 @@ def part1and2(data):
     rules = {}
     
     def processrule(rulename, n):
-        res = 0
-        found = False
-        for r in rules[rulename]:
-            if n >= r[1] and n <= r[1]+r[2]-1:
-                res = r[0]+n-r[1]
-                found = True
-                break
-        if not found:
-            res = n               
+        res = n
+        for r0, r1, r2 in rules[rulename]:
+            if r1 <= n <= r1+r2-1:
+                return r0+n-r1
         return res
     
     startmap = False
@@ -39,13 +34,11 @@ def part1and2(data):
         else:
             rules[mapnames[-1]].append([int(x) for x in line.split(' ')])
     
-    print("r1: ")
     r1 = []
     for s in seeds:
         for name in mapnames:
             s = processrule(name, s)
         r1.append(s)
-    print("r2: ")
     minr2 = 1E20
     for n in range(0, len(seeds) // 2):
         for x in range(seeds[n*2+1]):
@@ -56,7 +49,6 @@ def part1and2(data):
                 r2 = processrule(name, r2)
             if r2 < minr2:
                 minr2 = r2
-
     return min(r1), minr2       
             
 
